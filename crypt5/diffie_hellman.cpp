@@ -2,11 +2,8 @@
 
 void diffie_hellman(){
     Point base = generate_point();
-    Point m = generate_point();
-
 
     cout << "base = \n" << base << "\n";
-    cout << "m = \n" << m << "\n";
 
     const size_t a_len = 100;
     const size_t b_len = 200;

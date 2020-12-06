@@ -1,5 +1,4 @@
 #include "BinaryPolynomial.h"
-#include <assert.h>
 
 
 ostream &operator<<(ostream &out, const BinaryPolynomial &c) {
@@ -112,10 +111,8 @@ BinaryPolynomial BinaryPolynomial::operator*(const BinaryPolynomial &value) cons
 }
 
 BinaryPolynomial sqrt(const BinaryPolynomial &value) {
-    // heavily depended on polynomial
     BinaryPolynomial res = 0;
     BinaryPolynomial tmp(value);
-    Bits mask = 0;
 
     for (int i = 0; i < BinaryPolynomial::n; ++i) {
         if (tmp.bits[i]) {
@@ -133,8 +130,6 @@ BinaryPolynomial sqrt(const BinaryPolynomial &value) {
             }
         }
     }
-    //TODO can be removed
-    assert(value == res * res);
     return res;
 }
 
@@ -151,8 +146,10 @@ BinaryPolynomial inv(const BinaryPolynomial &value) {
     x = (value.get_bits() << shift);
     x.bits.flip(BinaryPolynomial::a);
     x.bits.flip(BinaryPolynomial::b);
-    BinaryPolynomial a, b, d;
-    d = extEuclid(value, x, a, b);
+    x.bits.flip(BinaryPolynomial::c);
+    x.bits.flip(BinaryPolynomial::d);
+    BinaryPolynomial a, b, p;
+    p = extEuclid(value, x, a, b);
     //TODO overflow ??
     return a + (b.bits << shift);
 }
@@ -178,7 +175,6 @@ BinaryPolynomial half_trace(const BinaryPolynomial &value) {
 int get_square_solution(BinaryPolynomial u, BinaryPolynomial w, BinaryPolynomial &y) {
     if (u == 0) {
         y = sqrt(w);
-        // w ^ 2 ^(n-1) works here too ?
         return 1;
     }
     if (w == 0) {
@@ -193,11 +189,7 @@ int get_square_solution(BinaryPolynomial u, BinaryPolynomial w, BinaryPolynomial
     }
     BinaryPolynomial half_tra = half_trace(v);
 
-    //std::cout << u << w << v  << tra << half_tra;
-
     y = half_tra * u;
-
-    //std::cout << y*y + y*u + w;
 
     return 2;
 }
