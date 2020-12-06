@@ -18,10 +18,10 @@ void get_random_bits(bitset<len> &inp){
 Point generate_point(){
     int k;
     BinaryPolynomial x,y;
-    do{
+    do {
         get_random_bits<BinaryPolynomial::n>(x.bits);
         k = get_square_solution(x,x*x*x+A*x*x+B,y);
-    }while( k <= 0);
+    } while( k <= 0);
     Point res_point = Point(x,y);
     return res_point;
 }
