@@ -144,7 +144,7 @@ BinaryPolynomial inv(const BinaryPolynomial &value) {
     }
     int shift = BinaryPolynomial::n - pos;
     x = (value.get_bits() << shift);
-    x.bits.flip(BinaryPolynomial::a);
+    x.bits.flip(BinaryPolynomial::a); //a b c d - lower coefs of poly
     x.bits.flip(BinaryPolynomial::b);
     x.bits.flip(BinaryPolynomial::c);
     x.bits.flip(BinaryPolynomial::d);

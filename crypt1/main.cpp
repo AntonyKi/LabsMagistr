@@ -174,7 +174,5 @@ int main()
     test_2();
     encrypt_file_CBC("hamlet.txt","out.txt");
     decrypt_file_CBC("out.txt","check.txt");
-   // encrypt_file_CBC("Tux.jpg","out");
-   // decrypt_file_CBC("out","check.jpg");
     return 0;
 }
